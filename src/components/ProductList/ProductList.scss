@@ -1,0 +1,25 @@
+img {
+	width: 200px;
+	height: 260px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	color: #333;
+	border-radius: 0.8rem;
+}
+img:hover {
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.container {
+	max-width: 75%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(8, 1fr);
+	grid-column-gap: 20px;
+	grid-row-gap: 0px;
+}
+
+span {
+	display: block;
+	max-width: 150px;
+}
