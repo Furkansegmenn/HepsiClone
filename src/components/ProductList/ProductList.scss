@@ -1,25 +1,101 @@
-img {
-	width: 200px;
-	height: 260px;
-	border: 1px solid #ccc;
-	padding: 10px;
-	color: #333;
-	border-radius: 0.8rem;
-}
-img:hover {
-	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
+$primary-color: #484848;
+$border-color: #333;
+$button-color: #ff6000;
+$original-price-font-size: 0.9rem;
+$discount-price-font-size: 1.1rem;
+$discount-percentage-font-size: 0.7rem;
 .container {
 	max-width: 75%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(8, 1fr);
 	grid-column-gap: 20px;
-	grid-row-gap: 0px;
-}
+	grid-row-gap: 3rem;
 
-span {
-	display: block;
-	max-width: 150px;
+	.products {
+		display: flex;
+		flex-direction: column;
+		height: 400px;
+		color: $primary-color;
+		border: 1px solid #ccc;
+		color: $border-color;
+		border-radius: 0.8rem;
+		padding: 10px;
+		position: relative;
+
+		.image-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		img {
+			height: 250px;
+			max-width: 100%;
+			display: flex;
+		}
+
+		.product-bottom {
+			display: flex;
+			flex-direction: column;
+			margin-top: 0.7rem;
+			flex-wrap: wrap;
+
+			.bottom-top {
+				display: flex;
+			}
+
+			h5 {
+				font-weight: 100;
+				white-space: wrap;
+				margin: 0;
+				font-size: 0.8rem;
+
+				span {
+					font-weight: bold;
+				}
+			}
+			.price {
+				margin: 5px 0 5px 0;
+				.original-price {
+					display: inline;
+					text-decoration: line-through;
+					color: gray;
+					font-size: $original-price-font-size;
+				}
+				.discounted-price {
+					display: block;
+					color: red;
+					font-weight: bold;
+					font-size: $discount-price-font-size;
+				}
+				.discountPercentage {
+					margin-left: 7px;
+					font-size: $discount-percentage-font-size;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+	.product-button {
+		width: 80%;
+		padding: 10px 20px;
+		color: white;
+		font-weight: bold;
+		border: none;
+		border-radius: 15px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+		position: absolute;
+		bottom: 20px;
+		left: 10%;
+	}
+
+	.products:hover {
+		cursor: pointer;
+		box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+
+		.product-button {
+			background-color: $button-color;
+		}
+	}
 }
