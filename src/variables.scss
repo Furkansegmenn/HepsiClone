@@ -1,0 +1,14 @@
+$border: 1px solid #ccc;
+$HepsiColor: #ff6000;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+$primary-color: #484848;
+
+%border {
+	border: 1px solid #ccc;
+	border-radius: 0.5rem;
+}

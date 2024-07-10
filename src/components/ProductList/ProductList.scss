@@ -1,11 +1,11 @@
-$primary-color: #484848;
-$border-color: #333;
+@import "../../variables.scss";
+
 $button-color: #ff6000;
 $original-price-font-size: 0.9rem;
 $discount-price-font-size: 1.1rem;
-$discount-percentage-font-size: 0.7rem;
+$discount-percentage-font-size: 0.9rem;
 .container {
-	max-width: 75%;
+	max-width: 70%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(8, 1fr);
@@ -13,13 +13,12 @@ $discount-percentage-font-size: 0.7rem;
 	grid-row-gap: 3rem;
 
 	.products {
+		max-width: 100%;
 		display: flex;
 		flex-direction: column;
-		height: 400px;
+		height: 450px;
 		color: $primary-color;
-		border: 1px solid #ccc;
-		color: $border-color;
-		border-radius: 0.8rem;
+		@extend %border;
 		padding: 10px;
 		position: relative;
 
@@ -48,7 +47,7 @@ $discount-percentage-font-size: 0.7rem;
 				font-weight: 100;
 				white-space: wrap;
 				margin: 0;
-				font-size: 0.8rem;
+				font-size: 0.9rem;
 
 				span {
 					font-weight: bold;
@@ -64,7 +63,7 @@ $discount-percentage-font-size: 0.7rem;
 				}
 				.discounted-price {
 					display: block;
-					color: red;
+					color: rgb(67, 158, 74);
 					font-weight: bold;
 					font-size: $discount-price-font-size;
 				}
@@ -80,7 +79,7 @@ $discount-percentage-font-size: 0.7rem;
 		width: 80%;
 		padding: 10px 20px;
 		color: white;
-		font-weight: bold;
+		font-weight: 700;
 		border: none;
 		border-radius: 15px;
 		cursor: pointer;

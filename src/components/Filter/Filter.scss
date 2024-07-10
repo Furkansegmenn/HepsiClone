@@ -1,4 +1,50 @@
-.container {
+@import "../../variables.scss";
+
+.filter-container {
+
+	font-size: 0.8rem;
 	display: flex;
 	flex-direction: column;
+
+	--sb-track-color: #232e33;
+	--sb-thumb-color: #ddd;
+	--sb-size: 14px;
+	height: 100vh;
+	overflow-y: auto;
+	background-color: #f9f9f9;
+	padding: 20px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+	color: $primary-color;
+	@extend %border;
+
+	.list-item {
+		list-style: none;
+	}
+
+	h5 {
+		margin-bottom: 10px;
+		font-size: 1rem;
+	}
+}
+.filter-container::-webkit-scrollbar {
+}
+
+.filter-container::-webkit-scrollbar-track {
+	border-radius: 4px;
+}
+
+.filter-container::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	.filter-container {
+		scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+	}
+}
+.brand,
+.category {
+	display: flex;
+	gap: 3px;
+	margin: 1rem 0;
 }
