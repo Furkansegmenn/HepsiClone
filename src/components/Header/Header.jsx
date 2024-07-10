@@ -10,12 +10,13 @@ const Header = () => {
 				<input type='text' placeholder='Ürün Adı giriniz.' />
 				<button className='search-button'>ARA</button>
 			</form>
-			<div className='box'>
-				<i className='fa-solid fa-basket-shopping'></i>
-				<Link to='../../page/Checkout/Checkout' className='link'>
+			<Link to='../../page/Checkout/Checkout' className='link'>
+				<div className='box'>
+					<i className='fa-solid fa-basket-shopping'></i>
+					<div className='nav-cart-count'>0</div>
 					Sepetim
-				</Link>
-			</div>
+				</div>
+			</Link>
 		</div>
 	);
 };

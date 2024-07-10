@@ -11,6 +11,9 @@ $discount-percentage-font-size: 0.9rem;
 	grid-template-rows: repeat(8, 1fr);
 	grid-column-gap: 20px;
 	grid-row-gap: 3rem;
+	.link {
+		text-decoration: none;
+	}
 
 	.products {
 		max-width: 100%;

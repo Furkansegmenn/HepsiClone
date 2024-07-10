@@ -38,24 +38,25 @@ const Filter = () => {
 		<div className='filter-container'>
 			<h5>Marka</h5>
 			{brands.map((brand) => (
-				<div key={brand}>
-					<div className='brand'>
-						<input type='checkbox' name={brand} />
-						<li className='list-item'>{brand}</li>
-					</div>
+				<div className='items' key={brand}>
+					<input type='checkbox' name={brand} id={brand} />
+					<label htmlFor={brand} className='list-item'>
+						{brand}
+					</label>
 				</div>
 			))}
 			<h5>Kategori</h5>
 			{categories.map((category) => (
-				<div key={category}>
-					<div className='category'>
-						<ul className='list'>
-							<input type='checkbox' />
-							<li className='list-item'>{category}</li>
-						</ul>
-					</div>
+				<div htmlFor={category} className='items' key={category}>
+					<input type='checkbox' name={category} id={category} />
+					<label className='list-item'>{category}</label>
 				</div>
 			))}
+			{/* <div htmlFor={category} className='items'>
+				<input type='checkbox' name={price} id={price} />
+				<label className='list-item'></label>
+				
+			</div> */}
 		</div>
 	);
 };
