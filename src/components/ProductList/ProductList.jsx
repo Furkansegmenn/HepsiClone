@@ -13,12 +13,12 @@ const ProductList = () => {
 	const handleMouseLeave = () => {
 		setHoveredProduct(null);
 	};
-
+	console.log(products);
 	return (
 		<div className='container'>
-			{products.length > 0 ? (
+			{products.length > 0 &&
 				products.map((product) => (
-					<Link to='../../page/ProductDetail/ProductDetail' className='link'>
+					<Link to={`/product/${product.id} `} className='link'>
 						<div
 							className='products'
 							key={product.id}
@@ -55,10 +55,7 @@ const ProductList = () => {
 							</div>
 						</div>
 					</Link>
-				))
-			) : (
-				<p>Loading...</p>
-			)}
+				))}
 		</div>
 	);
 };

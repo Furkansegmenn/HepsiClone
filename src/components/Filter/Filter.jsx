@@ -4,6 +4,7 @@ import "./Filter.scss";
 
 const Filter = () => {
 	const { products } = useContext(ProductContext);
+	//useRef ile checbox kontrolü
 
 	const getBrands = () => {
 		const brandList = [];
@@ -27,36 +28,65 @@ const Filter = () => {
 		return filteredCategoryList;
 	};
 
+	
+
 	const capitalizeFirstLetter = (string) => {
 		return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 	};
-
 	const brands = getBrands().map((brand) => capitalizeFirstLetter(brand));
 	const categories = getCategory().map((category) => capitalizeFirstLetter(category));
-
 	return (
 		<div className='filter-container'>
-			<h5>Marka</h5>
+			<h5>Brand</h5>
 			{brands.map((brand) => (
 				<div className='items' key={brand}>
 					<input type='checkbox' name={brand} id={brand} />
-					<label htmlFor={brand} className='list-item'>
-						{brand}
+					<label className='list-item' htmlFor={brand}>
+						{brand}{" "}
 					</label>
 				</div>
 			))}
-			<h5>Kategori</h5>
+			<h5>Category</h5>
 			{categories.map((category) => (
 				<div htmlFor={category} className='items' key={category}>
 					<input type='checkbox' name={category} id={category} />
 					<label className='list-item'>{category}</label>
 				</div>
 			))}
-			{/* <div htmlFor={category} className='items'>
-				<input type='checkbox' name={price} id={price} />
-				<label className='list-item'></label>
-				
-			</div> */}
+			<h5>Price</h5>
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>0-20 $</label>
+			</div>
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>50-100 $</label>
+			</div>
+
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>100-250 $</label>
+			</div>
+
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>250-500 $</label>
+			</div>
+
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>500 $ +</label>
+			</div>
+
+			<h5>Rating</h5>
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>4.5 points and above</label>
+			</div>
+			<div className='items'>
+				<input type='checkbox' />
+				<label className='list-item'>4 points and below</label>
+			</div>
 		</div>
 	);
 };

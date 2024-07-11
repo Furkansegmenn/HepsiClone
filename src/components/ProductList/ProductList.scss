@@ -1,9 +1,7 @@
 @import "../../variables.scss";
 
 $button-color: #ff6000;
-$original-price-font-size: 0.9rem;
-$discount-price-font-size: 1.1rem;
-$discount-percentage-font-size: 0.9rem;
+
 .container {
 	max-width: 70%;
 	display: grid;
@@ -56,26 +54,7 @@ $discount-percentage-font-size: 0.9rem;
 					font-weight: bold;
 				}
 			}
-			.price {
-				margin: 5px 0 5px 0;
-				.original-price {
-					display: inline;
-					text-decoration: line-through;
-					color: gray;
-					font-size: $original-price-font-size;
-				}
-				.discounted-price {
-					display: block;
-					color: rgb(67, 158, 74);
-					font-weight: bold;
-					font-size: $discount-price-font-size;
-				}
-				.discountPercentage {
-					margin-left: 7px;
-					font-size: $discount-percentage-font-size;
-					font-weight: bold;
-				}
-			}
+			
 		}
 	}
 	.product-button {
