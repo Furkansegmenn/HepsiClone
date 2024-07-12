@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetail.scss";
-import ProductList from "../../components/ProductList/ProductList";
 
 const ProductDetail = () => {
 	const [product, setProduct] = useState(null);
@@ -23,7 +22,8 @@ const ProductDetail = () => {
 			setProduct(data);
 		};
 		getProduct();
-	}, []);
+	}, [params.id]);
+
 	if (!product) {
 		return "loading";
 	}

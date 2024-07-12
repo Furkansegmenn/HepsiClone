@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { ProductContext } from "../../context/ProductContext";
+import { ShopContext } from "../../context/ShopContext";
 import "./Filter.scss";
 
 const Filter = () => {
-	const { products } = useContext(ProductContext);
+	const { products } = useContext(ShopContext);
 	//useRef ile checbox kontrolü
 
 	const getBrands = () => {
@@ -28,8 +28,6 @@ const Filter = () => {
 		return filteredCategoryList;
 	};
 
-	
-
 	const capitalizeFirstLetter = (string) => {
 		return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 	};
@@ -42,7 +40,7 @@ const Filter = () => {
 				<div className='items' key={brand}>
 					<input type='checkbox' name={brand} id={brand} />
 					<label className='list-item' htmlFor={brand}>
-						{brand}{" "}
+						{brand}
 					</label>
 				</div>
 			))}

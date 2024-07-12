@@ -3,12 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Checkout from "./pages/Checkout/Checkout";
-import { ProductProvider } from "./context/ProductContext";
+import { ShopContextProvider } from "./context/ShopContext";
 import Header from "./components/Header/Header";
 
 function App() {
 	return (
-		<ProductProvider>
+		<ShopContextProvider>
 			<Header />
 			<Routes>
 				<Route path='/' element={<Home />} />
@@ -16,7 +16,7 @@ function App() {
 				<Route path='/checkout' element={<Checkout />} />
 			</Routes>
 			{/* <Footer /> */}
-		</ProductProvider>
+		</ShopContextProvider>
 	);
 }
 

@@ -12,7 +12,7 @@ const Header = () => {
 				<input type='text' placeholder='Product name...' />
 				<button className='search-button'>Search</button>
 			</form>
-			<Link to='../../page/Checkout/Checkout' className='link'>
+			<Link to='./checkout' className='link'>
 				<div className='box'>
 					<i className='fa-solid fa-basket-shopping'></i>
 					<div className='nav-cart-count'>0</div>

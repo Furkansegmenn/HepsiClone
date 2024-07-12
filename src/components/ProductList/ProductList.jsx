@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { ProductContext } from "../../context/ProductContext";
+import { ShopContext } from "../../context/ShopContext";
 import "./ProductList.scss";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
-	const { products } = useContext(ProductContext);
+	const { products } = useContext(ShopContext);
 	const [hoveredProduct, setHoveredProduct] = useState(null);
 
 	const handleMouseEnter = (productId) => {
@@ -13,15 +13,14 @@ const ProductList = () => {
 	const handleMouseLeave = () => {
 		setHoveredProduct(null);
 	};
-	console.log(products);
+
 	return (
 		<div className='container'>
 			{products.length > 0 &&
 				products.map((product) => (
-					<Link to={`/product/${product.id} `} className='link'>
+					<Link to={`/product/${product.id} `} className='link' key={product.id}>
 						<div
 							className='products'
-							key={product.id}
 							onMouseEnter={() => handleMouseEnter(product.id)}
 							onMouseLeave={handleMouseLeave}
 						>

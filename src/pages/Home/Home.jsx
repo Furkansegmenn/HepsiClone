@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import Filter from "../../components/Filter/Filter";
 import ProductList from "../../components/ProductList/ProductList";
 import "./Home.scss";
-import { ProductContext } from "../../context/ProductContext";
+import { ShopContext } from "../../context/ShopContext";
 
 const Home = () => {
-	const { status } = useContext(ProductContext);
+	const { status } = useContext(ShopContext);
 	if (status == "loading") {
 		return null;
 	}
