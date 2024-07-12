@@ -102,7 +102,7 @@
 			border-radius: 5px;
 		}
 
-		.product-button {
+		.product-button-detail {
 			background-color: $HepsiColor;
 			width: 70%;
 			padding: 12px;
@@ -112,6 +112,10 @@
 			border: none;
 			border-radius: 15px;
 			cursor: pointer;
+			transition: transform 0.2s ease;
+			&:active {
+				transform: scale(0.95); /* Tıklama sırasında boyutunu küçült */
+			}
 		}
 	}
 	.empty {

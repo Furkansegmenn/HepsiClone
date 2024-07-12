@@ -1,11 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetail.scss";
+import { ShopContext } from "../../context/ShopContext";
 
 const ProductDetail = () => {
 	const [product, setProduct] = useState(null);
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 	const params = useParams();
+	const { addToCart } = useContext(ShopContext);
 
 	const handlePrevClick = () => {
 		setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? prevIndex : prevIndex - 1));
@@ -67,7 +69,9 @@ const ProductDetail = () => {
 					</span>
 					{product.stock < 30 && <span className='run-out'>About to run out</span>}
 					<br />
-					<button className='product-button'>Add to cart</button>
+					<button className='product-button-detail' onClick={() => addToCart(product)}>
+						Add to cart
+					</button>
 				</div>
 				<div className='empty'></div>
 			</div>

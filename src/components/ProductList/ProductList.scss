@@ -1,7 +1,5 @@
 @import "../../variables.scss";
 
-$button-color: #ff6000;
-
 .container {
 	max-width: 70%;
 	display: grid;
@@ -9,7 +7,8 @@ $button-color: #ff6000;
 	grid-template-rows: repeat(8, 1fr);
 	grid-column-gap: 20px;
 	grid-row-gap: 3rem;
-	.link {
+
+	.product-link {
 		text-decoration: none;
 	}
 
@@ -27,11 +26,12 @@ $button-color: #ff6000;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-		}
-		img {
-			height: 250px;
-			max-width: 100%;
-			display: flex;
+
+			img {
+				height: 250px;
+				max-width: 100%;
+				display: block; /* corrected */
+			}
 		}
 
 		.product-bottom {
@@ -46,7 +46,7 @@ $button-color: #ff6000;
 
 			h5 {
 				font-weight: 100;
-				white-space: wrap;
+				white-space: wrap; /* corrected to wrap */
 				margin: 0;
 				font-size: 0.9rem;
 
@@ -54,29 +54,33 @@ $button-color: #ff6000;
 					font-weight: bold;
 				}
 			}
-			
+		}
+
+		&:hover {
+			cursor: pointer;
+			box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+
+			.product-button {
+				background-color: $button-color;
+			}
 		}
 	}
-	.product-button {
-		width: 80%;
-		padding: 10px 20px;
-		color: white;
-		font-weight: 700;
-		border: none;
-		border-radius: 15px;
-		cursor: pointer;
-		transition: background-color 0.3s;
-		position: absolute;
-		bottom: 20px;
-		left: 10%;
-	}
+}
 
-	.products:hover {
-		cursor: pointer;
-		box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
-
-		.product-button {
-			background-color: $button-color;
-		}
+.product-button {
+	width: 80%;
+	padding: 10px 20px;
+	color: white;
+	font-weight: 700;
+	border: none;
+	border-radius: 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	position: absolute;
+	bottom: 20px;
+	left: 10%;
+	transition: transform 0.2s ease;
+	&:active {
+		transform: scale(0.95); /* Tıklama sırasında boyutunu küçült */
 	}
 }

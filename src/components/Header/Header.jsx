@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
+import { ShopContext } from "../../context/ShopContext";
 
 const Header = () => {
+	const { totalItemsInCart } = useContext(ShopContext);
+
 	return (
 		<div className='header'>
 			<Link to={"/"}>
@@ -15,7 +18,7 @@ const Header = () => {
 			<Link to='./checkout' className='link'>
 				<div className='box'>
 					<i className='fa-solid fa-basket-shopping'></i>
-					<div className='nav-cart-count'>0</div>
+					<div className='nav-cart-count'>{totalItemsInCart}</div>
 					Cart
 				</div>
 			</Link>
