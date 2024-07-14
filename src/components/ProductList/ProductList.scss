@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .container {
-	max-width: 70%;
+	width: 70%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(8, 1fr);
@@ -30,7 +30,7 @@
 			img {
 				height: 250px;
 				max-width: 100%;
-				display: block; /* corrected */
+				display: block;
 			}
 		}
 
@@ -46,7 +46,7 @@
 
 			h5 {
 				font-weight: 100;
-				white-space: wrap; /* corrected to wrap */
+				white-space: wrap;
 				margin: 0;
 				font-size: 0.9rem;
 
@@ -81,6 +81,18 @@
 	left: 10%;
 	transition: transform 0.2s ease;
 	&:active {
-		transform: scale(0.95); /* Tıklama sırasında boyutunu küçült */
+		transform: scale(0.95);
 	}
+}
+
+.not-found {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+	font-size: 2rem;
+	color: $primary-color;
+	text-align: center;
+	font-weight: bold;
+	margin-right: -50rem;
 }

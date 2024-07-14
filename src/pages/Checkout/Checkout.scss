@@ -131,3 +131,27 @@
 		}
 	}
 }
+.empty-cart {
+	margin-top: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	span {
+		font-size: 3rem;
+		color: rgba($color: $primary-color, $alpha: 0.9);
+	}
+	.link {
+		@extend %border;
+		padding: 10px;
+		background: rgba($color: $HepsiColor, $alpha: 1);
+		text-decoration: none;
+		font-size: 1.5rem;
+		color: $font-color;
+		transition: transform 0.2s ease;
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+}

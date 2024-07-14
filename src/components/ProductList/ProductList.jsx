@@ -4,7 +4,7 @@ import "./ProductList.scss";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
-	const { products, addToCart } = useContext(ShopContext);
+	const { products, addToCart, searchTerm } = useContext(ShopContext);
 	const [hoveredProduct, setHoveredProduct] = useState(null);
 
 	const handleMouseEnter = (productId) => {
@@ -20,10 +20,15 @@ const ProductList = () => {
 		addToCart(product);
 	};
 
+	// Filtrelenmiş ürünleri alma
+	const filteredProducts = products.filter((product) =>
+		product.title.toLowerCase().includes(searchTerm.toLowerCase())
+	);
+
 	return (
 		<div className='container'>
-			{products.length > 0 &&
-				products.map((product) => (
+			{filteredProducts.length > 0 ? (
+				filteredProducts.map((product) => (
 					<div className='link' key={product.id}>
 						<Link to={`/product/${product.id}`} className='product-link'>
 							<div
@@ -71,7 +76,10 @@ const ProductList = () => {
 							</div>
 						</Link>
 					</div>
-				))}
+				))
+			) : (
+				<p className='not-found'>Ürün bulunamadı :(</p>
+			)}
 		</div>
 	);
 };
