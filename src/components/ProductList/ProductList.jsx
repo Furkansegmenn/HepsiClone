@@ -1,11 +1,19 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import "./ProductList.scss";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ProductList = () => {
-	const { products, addToCart, searchTerm, selectedBrands, selectedCategories, selectedPriceRange } =
-		useContext(ShopContext);
+	const {
+		products,
+		addToCart,
+		searchTerm,
+		selectedBrands,
+		selectedCategories,
+		selectedPriceRange,
+		selectedRatingRange,
+	} = useContext(ShopContext);
 	const [hoveredProduct, setHoveredProduct] = useState(null);
 
 	const handleMouseEnter = (productId) => {
@@ -19,6 +27,7 @@ const ProductList = () => {
 	const handleAddToCart = (event, product) => {
 		event.preventDefault();
 		addToCart(product);
+		toast.success("Product added your");
 	};
 
 	// Filtrelenmiş ürünleri alma
@@ -32,7 +41,10 @@ const ProductList = () => {
 		const searchMatch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
 		const priceMatch =
 			!selectedPriceRange || (product.price >= selectedPriceRange.min && product.price <= selectedPriceRange.max);
-		return brandMatch && categoryMatch && searchMatch && priceMatch;
+		const ratingMatch =
+			!selectedRatingRange ||
+			(product.rating >= selectedRatingRange.min && product.rating <= selectedRatingRange.max);
+		return brandMatch && categoryMatch && searchMatch && priceMatch && ratingMatch;
 	});
 
 	return (

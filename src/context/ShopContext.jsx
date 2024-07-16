@@ -12,6 +12,7 @@ export const ShopContextProvider = ({ children }) => {
 	const [selectedBrands, setSelectedBrands] = useState([]);
 	const [selectedCategories, setSelectedCategories] = useState([]);
 	const [selectedPriceRange, setSelectedPriceRange] = useState(null);
+	const [selectedRatingRange, setSelectedRatingRange] = useState(null);
 	//apiyi çağırma fonksiyonu
 	const fetchProducts = async () => {
 		setStatus("loading");
@@ -87,9 +88,10 @@ export const ShopContextProvider = ({ children }) => {
 	};
 	const handlePriceRange = (priceRange) => {
 		setSelectedPriceRange(priceRange);
-		console.log(priceRange);
 	};
-	console.log(selectedPriceRange);
+	const handleRatingRange = (ratingRange) => {
+		setSelectedRatingRange(ratingRange);
+	};
 	const totalItemsInCart = cart.length;
 
 	//apiyi çağırdığımız fonksiyonu useEffect ile sayfa yüklendiğinde çağırıyoruz. Arrayin içi boş olduğu için herhangi bir duruma bağlı değil şuan.
@@ -115,6 +117,8 @@ export const ShopContextProvider = ({ children }) => {
 				handleCategoryChange,
 				selectedPriceRange,
 				handlePriceRange,
+				selectedRatingRange,
+				handleRatingRange,
 			}}
 		>
 			{children}

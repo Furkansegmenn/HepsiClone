@@ -3,8 +3,15 @@ import { ShopContext } from "../../context/ShopContext";
 import "./Filter.scss";
 
 const Filter = () => {
-	const { products, handleBrandChange, handleCategoryChange, handlePriceRange, selectedPriceRange } =
-		useContext(ShopContext);
+	const {
+		products,
+		handleBrandChange,
+		handleCategoryChange,
+		handlePriceRange,
+		selectedPriceRange,
+		handleRatingRange,
+		selectedRatingRange,
+	} = useContext(ShopContext);
 	//useRef ile checbox kontrolü
 	const getBrands = () => {
 		const brandList = [];
@@ -38,7 +45,12 @@ const Filter = () => {
 		{ label: "100-200$", value: { min: 100, max: 200 } },
 		{ label: "200$+", value: { min: 200, max: Infinity } },
 	];
-	console.log(selectedPriceRange);
+
+	const ratingRanges = [
+		{ label: "0-4", value: { min: 0, max: 4 } },
+		{ label: "4+", value: { min: 4, max: Infinity } },
+	];
+
 	const brands = getBrands().map((brand) => capitalizeFirstLetter(brand));
 	const categories = getCategory().map((category) => capitalizeFirstLetter(category));
 
@@ -76,6 +88,21 @@ const Filter = () => {
 						onChange={() => handlePriceRange(range.value)}
 					/>
 					<label className='list-item' htmlFor={range.label}>
+						{range.label}
+					</label>
+				</div>
+			))}
+			<h5>Rating Range</h5>
+			{ratingRanges.map((range) => (
+				<div className='items' key={range.label}>
+					<input
+						type='checkbox'
+						name='rating-range'
+						id='{range.label}'
+						checked={selectedRatingRange?.min === range.value.min}
+						onChange={() => handleRatingRange(range.value)}
+					/>
+					<label className='list-item' htmlFor='{range.label}'>
 						{range.label}
 					</label>
 				</div>

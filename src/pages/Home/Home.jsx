@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import Filter from "../../components/Filter/Filter";
 import ProductList from "../../components/ProductList/ProductList";
 import "./Home.scss";
