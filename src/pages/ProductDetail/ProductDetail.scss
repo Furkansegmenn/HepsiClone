@@ -1,10 +1,11 @@
 @import "../../variables.scss";
-
+@import "../../breakpoints.scss";
 .detail-container {
 	width: 100%;
-	margin: 2rem;
+	padding: 2rem;
 	display: flex;
 	gap: 3rem;
+	text-wrap: nowrap;
 
 	.left-container {
 		display: flex;
@@ -52,7 +53,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		flex: 2;
+
 		.brand {
 			font-size: 1.3rem;
 			font-weight: bold;
@@ -74,13 +75,12 @@
 		}
 
 		.original-price {
-			margin-top: -20px;
 			opacity: 0.7;
 			font-size: 1.5rem;
 		}
 
 		.discounted-price {
-			margin-top: 5px;
+			margin-top: -20px;
 			font-size: 2.2rem;
 		}
 
@@ -104,7 +104,6 @@
 
 		.product-button-detail {
 			background-color: $HepsiColor;
-			width: 70%;
 			padding: 12px;
 			color: white;
 			font-weight: 700;

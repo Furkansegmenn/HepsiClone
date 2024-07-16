@@ -18,7 +18,6 @@ const Checkout = () => {
 	};
 
 	const getItemPrice = (item) => {
-		console.log(item);
 		return item.price * item.quantity;
 	};
 
@@ -54,7 +53,7 @@ const Checkout = () => {
 													className='minus-button'
 													onClick={() => handleRemoveFromCart(item.id)}
 												>
-													_
+													-
 												</button>
 												<span> {item.quantity}</span>
 												<button onClick={() => handleIncreaseQuantity(item.id)}>+</button>

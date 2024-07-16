@@ -4,7 +4,8 @@ import "./ProductList.scss";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
-	const { products, addToCart, searchTerm } = useContext(ShopContext);
+	const { products, addToCart, searchTerm, selectedBrands, selectedCategories, selectedPriceRange } =
+		useContext(ShopContext);
 	const [hoveredProduct, setHoveredProduct] = useState(null);
 
 	const handleMouseEnter = (productId) => {
@@ -21,9 +22,18 @@ const ProductList = () => {
 	};
 
 	// Filtrelenmiş ürünleri alma
-	const filteredProducts = products.filter((product) =>
-		product.title.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+	const filteredProducts = products.filter((product) => {
+		const brandMatch =
+			selectedBrands.length === 0 ||
+			selectedBrands.some((brand) => brand.toLowerCase() === product.brand?.toLowerCase());
+		const categoryMatch =
+			selectedCategories.length === 0 ||
+			selectedCategories.some((category) => category.toLowerCase() === product.category?.toLowerCase());
+		const searchMatch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
+		const priceMatch =
+			!selectedPriceRange || (product.price >= selectedPriceRange.min && product.price <= selectedPriceRange.max);
+		return brandMatch && categoryMatch && searchMatch && priceMatch;
+	});
 
 	return (
 		<div className='container'>
@@ -55,6 +65,7 @@ const ProductList = () => {
 												</span>
 												<span className='discounted-price'>
 													{(product.price * (1 - product.discountPercentage / 100)).toFixed(
+														//indirimli fiyatı hesaplama
 														2
 													)}
 													$
@@ -67,7 +78,7 @@ const ProductList = () => {
 									{hoveredProduct === product.id && (
 										<button
 											className='product-button'
-											onClick={(event) => handleAddToCart(event, product)}
+											onClick={(event) => handleAddToCart(event, product)} //sepete ürün ekleme butonu
 										>
 											Add to Cart
 										</button>

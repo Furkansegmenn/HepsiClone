@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 //context oluşturma
 export const ShopContext = createContext({});
@@ -9,7 +9,9 @@ export const ShopContextProvider = ({ children }) => {
 	const [status, setStatus] = useState("idle");
 	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("hepsiburada")) || []);
 	const [searchTerm, setSearchTerm] = useState("");
-
+	const [selectedBrands, setSelectedBrands] = useState([]);
+	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [selectedPriceRange, setSelectedPriceRange] = useState(null);
 	//apiyi çağırma fonksiyonu
 	const fetchProducts = async () => {
 		setStatus("loading");
@@ -19,14 +21,13 @@ export const ShopContextProvider = ({ children }) => {
 		setStatus("succeeded");
 	};
 
-	//sepete ürün ekleme ve arttırma
+	//sepete ürün ekleme ve arttırma (Local Storage' kaydetme)
 	const addToCart = (product) => {
 		setCart((prevCart) => {
 			const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
 
 			let updatedCart;
 			if (existingProductIndex !== -1) {
-				// Ürün zaten varsa, miktarını artır
 				updatedCart = prevCart.map((item, index) => {
 					if (index === existingProductIndex) {
 						return { ...item, quantity: item.quantity + 1 };
@@ -34,11 +35,9 @@ export const ShopContextProvider = ({ children }) => {
 					return item;
 				});
 			} else {
-				// Ürün yoksa, sepete yeni ürün olarak ekle
 				updatedCart = [...prevCart, { ...product, quantity: 1 }];
 			}
 
-			// Güncellenmiş sepeti localStorage'a kaydet
 			localStorage.setItem("hepsiburada", JSON.stringify(updatedCart));
 			return updatedCart;
 		});
@@ -59,7 +58,6 @@ export const ShopContextProvider = ({ children }) => {
 					})
 					.filter((item) => item.quantity > 0);
 
-				// Güncellenmiş sepeti localStorage'a kaydet
 				localStorage.setItem("hepsiburada", JSON.stringify(updatedCart));
 				return updatedCart;
 			} else {
@@ -68,6 +66,30 @@ export const ShopContextProvider = ({ children }) => {
 		});
 	};
 
+	const handleBrandChange = (brand) => {
+		setSelectedBrands((prevSelectedBrands) => {
+			if (prevSelectedBrands.includes(brand)) {
+				return prevSelectedBrands.filter((b) => b !== brand);
+			} else {
+				return [...prevSelectedBrands, brand];
+			}
+		});
+	};
+
+	const handleCategoryChange = (category) => {
+		setSelectedCategories((prevSelectedCategories) => {
+			if (prevSelectedCategories.includes(category)) {
+				return prevSelectedCategories.filter((c) => c !== category);
+			} else {
+				return [...prevSelectedCategories, category];
+			}
+		});
+	};
+	const handlePriceRange = (priceRange) => {
+		setSelectedPriceRange(priceRange);
+		console.log(priceRange);
+	};
+	console.log(selectedPriceRange);
 	const totalItemsInCart = cart.length;
 
 	//apiyi çağırdığımız fonksiyonu useEffect ile sayfa yüklendiğinde çağırıyoruz. Arrayin içi boş olduğu için herhangi bir duruma bağlı değil şuan.
@@ -87,6 +109,12 @@ export const ShopContextProvider = ({ children }) => {
 				totalItemsInCart,
 				searchTerm,
 				setSearchTerm,
+				selectedBrands,
+				selectedCategories,
+				handleBrandChange,
+				handleCategoryChange,
+				selectedPriceRange,
+				handlePriceRange,
 			}}
 		>
 			{children}

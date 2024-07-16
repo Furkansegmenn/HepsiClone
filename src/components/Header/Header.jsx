@@ -40,7 +40,7 @@ const Header = () => {
 				<div className='box'>
 					<i className='fa-solid fa-basket-shopping'></i>
 					<div className='nav-cart-count'>{totalItemsInCart}</div>
-					Cart
+					<span>Cart</span>
 				</div>
 			</Link>
 		</div>
