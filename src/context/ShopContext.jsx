@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 //context oluşturma
 export const ShopContext = createContext({});
 
 //context te Provider fonksiyonu sayesinde variable lara diğer components ve pagelerden erişebiliyoruz.
 export const ShopContextProvider = ({ children }) => {
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [products, setProducts] = useState([]);
 	const [status, setStatus] = useState("idle");
 	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("hepsiburada")) || []);
@@ -66,32 +68,63 @@ export const ShopContextProvider = ({ children }) => {
 			}
 		});
 	};
+	//marka filtresi ile çağırılan fonk.
+	const updatedParams = new URLSearchParams(searchParams);
 
 	const handleBrandChange = (brand) => {
 		setSelectedBrands((prevSelectedBrands) => {
-			if (prevSelectedBrands.includes(brand)) {
-				return prevSelectedBrands.filter((b) => b !== brand);
+			const updatedBrands = prevSelectedBrands.includes(brand)
+				? prevSelectedBrands.filter((b) => b !== brand)
+				: [...prevSelectedBrands, brand];
+
+			if (updatedBrands.length > 0) {
+				updatedParams.set("brands", updatedBrands.join(","));
 			} else {
-				return [...prevSelectedBrands, brand];
+				updatedParams.delete("brands");
 			}
+
+			setSearchParams(updatedParams);
+			return updatedBrands;
 		});
 	};
 
 	const handleCategoryChange = (category) => {
 		setSelectedCategories((prevSelectedCategories) => {
-			if (prevSelectedCategories.includes(category)) {
-				return prevSelectedCategories.filter((c) => c !== category);
+			const updatedCategories = prevSelectedCategories.includes(category)
+				? prevSelectedCategories.filter((c) => c !== category)
+				: [...prevSelectedCategories, category];
+
+			if (updatedCategories.length > 0) {
+				updatedParams.set("categories", updatedCategories.join(","));
 			} else {
-				return [...prevSelectedCategories, category];
+				updatedParams.delete("categories");
 			}
+
+			setSearchParams(updatedParams);
+			return updatedCategories;
 		});
 	};
+
 	const handlePriceRange = (priceRange) => {
 		setSelectedPriceRange(priceRange);
+		if (priceRange) {
+			updatedParams.set("priceRange", priceRange);
+		} else {
+			updatedParams.delete("priceRange");
+		}
+		setSearchParams(updatedParams);
 	};
+
 	const handleRatingRange = (ratingRange) => {
 		setSelectedRatingRange(ratingRange);
+		if (ratingRange) {
+			updatedParams.set("ratingRange", ratingRange);
+		} else {
+			updatedParams.delete("ratingRange");
+		}
+		setSearchParams(updatedParams);
 	};
+
 	const totalItemsInCart = cart.length;
 
 	//apiyi çağırdığımız fonksiyonu useEffect ile sayfa yüklendiğinde çağırıyoruz. Arrayin içi boş olduğu için herhangi bir duruma bağlı değil şuan.
@@ -119,6 +152,8 @@ export const ShopContextProvider = ({ children }) => {
 				handlePriceRange,
 				selectedRatingRange,
 				handleRatingRange,
+				searchParams,
+				setSearchParams,
 			}}
 		>
 			{children}

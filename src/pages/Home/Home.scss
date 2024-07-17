@@ -1,6 +1,14 @@
+body {
+	height: 100vh;
+	width: 100vw;
+	overflow-x: hidden;
+}
 .home {
 	display: flex;
-	justify-content: space-evenly;
+	flex-direction: row;
+	max-width: 1200px;
 	align-items: start;
-
+	position: relative;
+	margin: 0 auto 4rem auto;
+	gap: 2rem;
 }

@@ -27,7 +27,7 @@
 			align-items: center;
 			height: 40px;
 			width: 40px;
-			font-size: 1.2rem;
+			font-size: 1rem;
 			font-weight: 100;
 			border-radius: 50%;
 			align-self: center;
@@ -55,7 +55,7 @@
 		gap: 20px;
 
 		.brand {
-			font-size: 1.3rem;
+			font-size: 1.1rem;
 			font-weight: bold;
 
 			.title {
@@ -76,12 +76,12 @@
 
 		.original-price {
 			opacity: 0.7;
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 		}
 
 		.discounted-price {
 			margin-top: -20px;
-			font-size: 2.2rem;
+			font-size: 2rem;
 		}
 
 		.profit {
@@ -100,6 +100,7 @@
 			background-color: rgba($color: red, $alpha: 0.7);
 			padding: 5px;
 			border-radius: 5px;
+			font-size: 0.9rem;
 		}
 
 		.product-button-detail {
@@ -107,7 +108,7 @@
 			padding: 12px;
 			color: white;
 			font-weight: 700;
-			font-size: large;
+			font-size: 1rem;
 			border: none;
 			border-radius: 15px;
 			cursor: pointer;

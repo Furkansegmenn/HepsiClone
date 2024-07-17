@@ -1,61 +1,59 @@
 @import "../../variables.scss";
-body {
-}
+@import "../../breakpoints.scss";
+
 .filter-container {
 	--sb-track-color: #232e33;
 	--sb-thumb-color: #ddd;
 	--sb-size: 14px;
 	height: 100vh;
+	width: inherit;
 	overflow-y: auto;
 	background-color: #fff;
-	padding: 20px;
-	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+	padding: 25px 45px 25px 25px;
+	box-shadow: 2px 0 5px rgba(221, 173, 173, 0.1);
 	color: $primary-color;
 	@extend %border;
-	font-size: 0.8rem;
 	display: flex;
 	flex-direction: column;
-	max-width: 100%;
-
-	.list-item {
-		list-style: none;
+	position: sticky;
+	top: 0;
+	text-wrap: nowrap;
+	overflow-x: hidden;
+	.filter-container::-webkit-scrollbar-track {
+		border-radius: 4px;
 	}
 
-	h5 {
-		margin: 10px 0px 10px 0px;
-		font-size: 1rem;
+	.filter-container::-webkit-scrollbar-thumb {
+		border-radius: 3px;
 	}
-}
-.filter-container::-webkit-scrollbar {
-}
 
-.filter-container::-webkit-scrollbar-track {
-	border-radius: 4px;
-}
-
-.filter-container::-webkit-scrollbar-thumb {
-	border-radius: 3px;
-}
-
-@supports not selector(::-webkit-scrollbar) {
-	.filter-container {
-		scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-	}
-}
-.items {
-	border: 1px solid transparent;
-	display: flex;
-	gap: 5px;
-	margin: 10px;
-	cursor: pointer;
-	padding: 3px;
-	&:hover {
-		border: 1px solid #dedede;
-		background-color: #dedede;
-		border-radius: 0.5rem;
-	}
-	label,
-	input {
+	.items {
+		width: fit-content;
+		border: 1px solid transparent;
+		display: flex;
+		gap: 5px;
+		margin: 5px;
 		cursor: pointer;
+		padding: 5px;
+		font-size: 0.7rem;
+
+		&:hover {
+			border: 1px solid #dedede;
+			background-color: #dedede;
+			border-radius: 0.5rem;
+		}
+		label,
+		input {
+			cursor: pointer;
+		}
+	}
+}
+
+@include mediaQuery(768px) {
+	.filter-container {
+		padding: 10px 30px 10px 10px;
+		.items label {
+			font-size: 0.5rem;
+		}
 	}
 }

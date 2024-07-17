@@ -1,11 +1,14 @@
 @import "../../variables.scss";
 .footer {
-	height: 50vh;
+	width: 100vw;
+	height: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: $HepsiColor;
 	color: $font-color;
 	font-size: 2rem;
-	margin-top: 2rem;
+	position: relative;
+	margin-top: auto;
+	bottom: 0;
 }

@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 @import "../../breakpoints.scss";
+@import "../../index.css";
 .container {
-	width: 70%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-column-gap: 20px;
@@ -13,7 +13,6 @@
 
 	.products {
 		flex-direction: row;
-		height: 300px;
 		max-width: 100%;
 		display: flex;
 		flex-direction: column;
@@ -48,7 +47,7 @@
 				font-weight: 100;
 				white-space: wrap;
 				margin: 0;
-				font-size: 0.9rem;
+				font-size: 0.8rem;
 
 				span {
 					font-weight: bold;
@@ -120,7 +119,7 @@
 				.product-bottom {
 					align-items: center;
 					h5 {
-						font-size: 0.6rem;
+						font-size: 0.5rem;
 						text-align: center;
 					}
 				}
@@ -140,18 +139,18 @@
 			.original-price {
 				margin-top: 5px;
 				display: block;
-				font-size: 0.6rem;
+				font-size: 0.5rem;
 			}
 			.discountPercentage {
 				margin: 0;
 				margin-top: 5px;
 				display: block;
-				font-size: 0.5rem;
+				font-size: 0.4rem;
 			}
 			.discounted-price {
 				margin-top: 5px;
 				display: block;
-				font-size: 0.7rem;
+				font-size: 0.6rem;
 			}
 		}
 		.product-button {

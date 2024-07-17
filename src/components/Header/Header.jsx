@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Header.scss";
 import { Link, useLocation } from "react-router-dom";
 import { ShopContext } from "../../context/ShopContext";
-
 const Header = () => {
-	const { totalItemsInCart, setSearchTerm } = useContext(ShopContext);
+	const { totalItemsInCart, setSearchTerm, searchParams, setSearchParams } = useContext(ShopContext);
+
 	const [inputValue, setInputValue] = useState("");
 	const location = useLocation();
 
@@ -23,8 +23,21 @@ const Header = () => {
 	const handleSearch = (e) => {
 		e.preventDefault();
 		setSearchTerm(inputValue);
-		setInputValue("");
+		const updatedParams = new URLSearchParams(searchParams);
+		if (inputValue) {
+			updatedParams.set("search", inputValue);
+		} else {
+			updatedParams.delete("search");
+		}
+		setSearchParams(updatedParams);
 	};
+
+	useEffect(() => {
+		if (location.pathname === "/") {
+			setSearchParams({});
+		}
+	}, [location.pathname]);
+
 	return (
 		<div className='header'>
 			<Link onClick={handleLogoClick}>

@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 function App() {
 	return (
 		<ShopContextProvider>
-			<Header />
+			<Header history = {History} />
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/product/:id' element={<ProductDetail />} />

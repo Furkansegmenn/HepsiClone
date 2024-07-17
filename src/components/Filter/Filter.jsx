@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { ShopContext } from "../../context/ShopContext";
 import "./Filter.scss";
 
@@ -12,6 +12,7 @@ const Filter = () => {
 		handleRatingRange,
 		selectedRatingRange,
 	} = useContext(ShopContext);
+
 	//useRef ile checbox kontrolü
 	const getBrands = () => {
 		const brandList = [];
@@ -48,7 +49,7 @@ const Filter = () => {
 
 	const ratingRanges = [
 		{ label: "0-4", value: { min: 0, max: 4 } },
-		{ label: "4+", value: { min: 4, max: Infinity } },
+		{ label: "4+", value: { min: 4.01, max: Infinity } },
 	];
 
 	const brands = getBrands().map((brand) => capitalizeFirstLetter(brand));
