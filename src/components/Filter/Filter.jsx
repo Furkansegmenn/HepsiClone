@@ -8,16 +8,18 @@ const Filter = () => {
 		handleBrandChange,
 		handleCategoryChange,
 		handlePriceRange,
+		selectedBrands,
+		selectedCategories,
 		selectedPriceRange,
-		handleRatingRange,
 		selectedRatingRange,
+		handleRatingRange,
 	} = useContext(ShopContext);
 
-	//useRef ile checbox kontrolü
+	// useRef ile checkbox kontrolü
 	const getBrands = () => {
 		const brandList = [];
 		products.forEach((product) => {
-			if (brandList.findIndex((brand) => brand == product.brand) == -1) {
+			if (brandList.findIndex((brand) => brand === product.brand) === -1) {
 				brandList.push(product.brand);
 			}
 		});
@@ -28,7 +30,7 @@ const Filter = () => {
 	const getCategory = () => {
 		const categoryList = [];
 		products.forEach((product) => {
-			if (categoryList.findIndex((category) => category == product.category) == -1) {
+			if (categoryList.findIndex((category) => category === product.category) === -1) {
 				categoryList.push(product.category);
 			}
 		});
@@ -60,7 +62,13 @@ const Filter = () => {
 			<h5>Brand</h5>
 			{brands.map((brand) => (
 				<div className='items' key={brand}>
-					<input type='checkbox' name={brand} id={brand} onChange={() => handleBrandChange(brand)} />
+					<input
+						type='checkbox'
+						name={brand}
+						id={brand}
+						checked={selectedBrands.includes(brand)}
+						onChange={() => handleBrandChange(brand)}
+					/>
 					<label className='list-item' htmlFor={brand}>
 						{brand}
 					</label>
@@ -68,14 +76,17 @@ const Filter = () => {
 			))}
 			<h5>Category</h5>
 			{categories.map((category) => (
-				<div htmlFor={category} className='items' key={category}>
+				<div className='items' key={category}>
 					<input
 						type='checkbox'
 						name={category}
 						id={category}
+						checked={selectedCategories.includes(category)}
 						onChange={() => handleCategoryChange(category)}
 					/>
-					<label className='list-item'>{category}</label>
+					<label className='list-item' htmlFor={category}>
+						{category}
+					</label>
 				</div>
 			))}
 			<h5>Price Range</h5>
@@ -85,7 +96,9 @@ const Filter = () => {
 						type='radio'
 						name='price-range'
 						id={range.label}
-						checked={selectedPriceRange?.max === range.value.max}
+						checked={
+							selectedPriceRange?.min === range.value.min && selectedPriceRange?.max === range.value.max
+						}
 						onChange={() => handlePriceRange(range.value)}
 					/>
 					<label className='list-item' htmlFor={range.label}>
@@ -99,11 +112,13 @@ const Filter = () => {
 					<input
 						type='checkbox'
 						name='rating-range'
-						id='{range.label}'
-						checked={selectedRatingRange?.min === range.value.min}
+						id={range.label}
+						checked={
+							selectedRatingRange?.min === range.value.min && selectedRatingRange?.max === range.value.max
+						}
 						onChange={() => handleRatingRange(range.value)}
 					/>
-					<label className='list-item' htmlFor='{range.label}'>
+					<label className='list-item' htmlFor={range.label}>
 						{range.label}
 					</label>
 				</div>

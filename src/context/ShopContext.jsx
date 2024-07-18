@@ -1,30 +1,49 @@
 import { createContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-//context oluşturma
 export const ShopContext = createContext({});
 
-//context te Provider fonksiyonu sayesinde variable lara diğer components ve pagelerden erişebiliyoruz.
 export const ShopContextProvider = ({ children }) => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [products, setProducts] = useState([]);
 	const [status, setStatus] = useState("idle");
 	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("hepsiburada")) || []);
-	const [searchTerm, setSearchTerm] = useState("");
-	const [selectedBrands, setSelectedBrands] = useState([]);
-	const [selectedCategories, setSelectedCategories] = useState([]);
-	const [selectedPriceRange, setSelectedPriceRange] = useState(null);
-	const [selectedRatingRange, setSelectedRatingRange] = useState(null);
-	//apiyi çağırma fonksiyonu
+	const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
+	const [selectedBrands, setSelectedBrands] = useState(searchParams.get("brands")?.split(",") || []);
+	const [selectedCategories, setSelectedCategories] = useState(searchParams.get("categories")?.split(",") || []);
+	const [selectedPriceRange, setSelectedPriceRange] = useState(() => {
+		const priceRangeFromParams = searchParams.get("priceRange");
+		if (priceRangeFromParams) {
+			const [min, max] = priceRangeFromParams.split("-").map(Number);
+			return { min, max };
+		}
+		return null;
+	});
+	const [selectedRatingRange, setSelectedRatingRange] = useState(() => {
+		const ratingRangeFromParams = searchParams.get("ratingRange");
+		if (ratingRangeFromParams) {
+			const [min, max] = ratingRangeFromParams.split("-").map(Number);
+			return { min, max };
+		}
+		return null;
+	});
+
 	const fetchProducts = async () => {
 		setStatus("loading");
-		const response = await fetch("https://dummyjson.com/products");
-		const data = await response.json();
-		setProducts(data.products);
-		setStatus("succeeded");
+		try {
+			const response = await fetch("https://dummyjson.com/products");
+			if (!response.ok) {
+				throw new Error("Failed to fetch products");
+			}
+			const data = await response.json();
+			setProducts(data.products);
+			setStatus("succeeded");
+		} catch (error) {
+			setStatus("failed");
+			console.error("Error fetching products:", error);
+		}
 	};
 
-	//sepete ürün ekleme ve arttırma (Local Storage' kaydetme)
 	const addToCart = (product) => {
 		setCart((prevCart) => {
 			const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
@@ -46,7 +65,6 @@ export const ShopContextProvider = ({ children }) => {
 		});
 	};
 
-	// sepetten ürün azaltma
 	const removeFromCart = (productId) => {
 		setCart((prevCart) => {
 			const existingProductIndex = prevCart.findIndex((item) => item.id === productId);
@@ -68,7 +86,7 @@ export const ShopContextProvider = ({ children }) => {
 			}
 		});
 	};
-	//marka filtresi ile çağırılan fonk.
+
 	const updatedParams = new URLSearchParams(searchParams);
 
 	const handleBrandChange = (brand) => {
@@ -107,33 +125,37 @@ export const ShopContextProvider = ({ children }) => {
 
 	const handlePriceRange = (priceRange) => {
 		setSelectedPriceRange(priceRange);
+		const updatedParams = new URLSearchParams(searchParams);
+
 		if (priceRange) {
-			updatedParams.set("priceRange", priceRange);
+			updatedParams.set("priceRange", `${priceRange.min}-${priceRange.max}`);
 		} else {
 			updatedParams.delete("priceRange");
 		}
+
 		setSearchParams(updatedParams);
 	};
 
 	const handleRatingRange = (ratingRange) => {
 		setSelectedRatingRange(ratingRange);
+		const updatedParams = new URLSearchParams(searchParams);
+
 		if (ratingRange) {
-			updatedParams.set("ratingRange", ratingRange);
+			updatedParams.set("ratingRange", `${ratingRange.min}-${ratingRange.max}`);
 		} else {
 			updatedParams.delete("ratingRange");
 		}
+
 		setSearchParams(updatedParams);
 	};
 
 	const totalItemsInCart = cart.length;
 
-	//apiyi çağırdığımız fonksiyonu useEffect ile sayfa yüklendiğinde çağırıyoruz. Arrayin içi boş olduğu için herhangi bir duruma bağlı değil şuan.
 	useEffect(() => {
 		fetchProducts();
 	}, []);
 
 	return (
-		//bu value ları useContext ile diğer sayfalarda kullanılabilir hale getiriyoruz.
 		<ShopContext.Provider
 			value={{
 				products,
@@ -152,8 +174,8 @@ export const ShopContextProvider = ({ children }) => {
 				handlePriceRange,
 				selectedRatingRange,
 				handleRatingRange,
-				searchParams,
 				setSearchParams,
+				updatedParams,
 			}}
 		>
 			{children}

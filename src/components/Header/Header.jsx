@@ -2,15 +2,20 @@ import { useContext, useEffect, useState } from "react";
 import "./Header.scss";
 import { Link, useLocation } from "react-router-dom";
 import { ShopContext } from "../../context/ShopContext";
-const Header = () => {
-	const { totalItemsInCart, setSearchTerm, searchParams, setSearchParams } = useContext(ShopContext);
 
-	const [inputValue, setInputValue] = useState("");
+const Header = () => {
+	const { totalItemsInCart, searchTerm, setSearchTerm, updatedParams, setSearchParams } = useContext(ShopContext);
+	const [inputValue, setInputValue] = useState(searchTerm);
 	const location = useLocation();
+
+	// URL parametrelerinde değişiklik olduğunda inputValue'yi güncelle
+	useEffect(() => {
+		setInputValue(searchTerm);
+	}, [searchTerm]);
 
 	const handleLogoClick = () => {
 		if (location.pathname === "/") {
-			window.location.reload();
+			window.location.replace();
 		} else {
 			window.location.pathname = "/";
 		}
@@ -23,7 +28,7 @@ const Header = () => {
 	const handleSearch = (e) => {
 		e.preventDefault();
 		setSearchTerm(inputValue);
-		const updatedParams = new URLSearchParams(searchParams);
+
 		if (inputValue) {
 			updatedParams.set("search", inputValue);
 		} else {
@@ -31,12 +36,6 @@ const Header = () => {
 		}
 		setSearchParams(updatedParams);
 	};
-
-	useEffect(() => {
-		if (location.pathname === "/") {
-			setSearchParams({});
-		}
-	}, [location.pathname]);
 
 	return (
 		<div className='header'>
